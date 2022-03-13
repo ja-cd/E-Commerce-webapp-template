@@ -1,0 +1,52 @@
+.NavbarItems{
+    background-color: #030218;
+    height: 80px;
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.navbar-text {
+    color: #fff;
+    justify-self: start;
+    cursor: pointer;
+    padding-left: 2%;
+}
+
+.navbar-cart {
+    color: #fff;
+    justify-self: end;
+    cursor: pointer;
+    padding-right: 2%;
+}
+
+.nav-cart:hover {
+    border-color: white;
+    border-width: 1px;
+  }
+
+.nav-menu{
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 10px;
+    list-style: none;
+    text-align: center1;
+    width: 80vw;
+    justify-content: center;
+}
+
+.css-input {
+    width: 500px;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-width: 2px;
+    border-color: #b674e5;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 50px;
+    box-shadow: 0px 0px 0px rgba(66,66,66,.0);
+    text-shadow: 0px 0px 0px rgba(66,66,66,.0);
+}
+  

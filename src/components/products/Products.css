@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px 20px;
+  }
+  
+  .card {
+    margin: 1rem auto;
+    border-radius: 6px;
+    background-color: white;
+    padding: 1rem;
+    width: 90%;
+    max-width: 15rem;
+  }
+  .item h3 {
+    font-size: 1.8rem;
+  }
+  
+  .item header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  
+  .price {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .item p {
+    color: #3a3a3a;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .footer{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+  }
+  .buttonClass {
+    font-size:15px;
+    width:200px;
+    height:33px;
+    border-width:1px;
+    color:rgba(0, 0, 0, 1);
+    border-color:rgba(255, 255, 255, 1);
+    font-weight:bold;
+    border-top-left-radius:6px;
+    border-top-right-radius:6px;
+    border-bottom-left-radius:6px;
+    border-bottom-right-radius:6px;
+    box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 1);
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 1);
+  }
+  
+  .buttonClass:hover {
+    background: rgba(255, 255, 255, 1)
+  }
+                
