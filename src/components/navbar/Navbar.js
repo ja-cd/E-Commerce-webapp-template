@@ -1,32 +1,24 @@
-import Cart from './Cart';
+import classes from './Navbar.module.css'
 
-import './Navbar.css';
+import { NavLink } from "react-router-dom";
 
-import { cartActions } from '../store/cartSlice';
-import { useSelector, useDispatch } from 'react-redux';
-
-// Navbar that contains cart component
+import { useSelector } from "react-redux";
 
 function Navbar() {
-    const dispatch = useDispatch();
-    const cart = useSelector(state => state.cart.showCart)
-    const quantity = useSelector(state => state.cart.totalQuantity)
+  const quantity = useSelector((state) => state.cart.totalQuantity);
 
-    return (
-        <>
-            <nav className="NavbarItems">
-                <h1 className="navbar-text">E-Commerce Site</h1>
-                <div className="menu-icon">
+  return (
+    <>
+      <nav className={classes.navbar}>
+        <NavLink className={classes.text} to="/">E-Commerce Site</NavLink>
 
-                </div>
-                <form className="nav-menu">
-                    <input type="text" className="css-input" />
-                </form>
-                <h1 className="navbar-cart" onClick={() => dispatch(cartActions.toggleCart())}> Cart {quantity}</h1>
-            </nav>
-            {cart && <Cart />}
-        </>
-    );
+        <form className={classes.format}>
+          <input type="text" className={classes.form} />
+        </form>
 
+        <NavLink className={classes.cart} to="/cart">Cart ({quantity})</NavLink>
+      </nav>
+    </>
+  );
 }
 export default Navbar;
