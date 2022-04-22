@@ -20,8 +20,8 @@ const cartSlice = createSlice({
       state.subTotal = 0;
     },
     // addToCart takes a payload that contains the item to be added to the cart,
-    // it checks if the item currently excists in the cart, if it does not add it, it it does
-    // then increases the amount of hte items and updates the item subtotal and cart subtotal
+    // checks if the item currently exists in the cart, if it does not then add it, it it does
+    // then increase the amount of the items and update the item subtotal and cart subtotal
     addToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.cartContents.find(
