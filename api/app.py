@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 productList = [
     {
@@ -29,28 +31,33 @@ productList = [
     },
 ]
 
+@app.route('/hello')
+def hello():
+  return jsonify('hello')
+
 @app.route('/search', methods=['GET'])
 def getProduct():
-    searchTerm = request.get_json()
-    itemsFound = []
-    for product in productList:
-        if searchTerm["searchTerm"].lower() in product["productName"].lower():
-            itemsFound.append(product)
-    if len(itemsFound) > 0:
-        return jsonify(itemsFound)
-    return('Not found')
+  searchTerm = request.get_json()
+  itemsFound = []
+  for product in productList:
+      if searchTerm["searchTerm"].lower() in product["productName"].lower():
+          itemsFound.append(product)
+  if len(itemsFound) > 0:
+      return jsonify(itemsFound)
+  return('Not found')
 
 # Searchbar endpoint receives a string and returns a list of product names that match
-@app.route('/searchBar', methods=['GET'])
+@app.route('/searchBar/', methods=['POST'])
 def searchBar():
-    searchTerm = request.get_json()
-    itemsFound = []
-    for product in productList:
-        if searchTerm["searchTerm"].lower() in product["productName"].lower():
-            itemsFound.append(product["productName"])
-    if len(itemsFound) > 0:
-        return jsonify(itemsFound)
-    return('Not found')
+  print(request.get_json())
+  searchTerm = request.get_json()
+  itemsFound = []
+  for product in productList:
+      if searchTerm["searchTerm"].lower() in product["productName"].lower():
+          itemsFound.append(product["productName"])
+  if len(itemsFound) > 0:
+      return jsonify(itemsFound)
+  return('Not found')
 
 
 if __name__ == '__main__':

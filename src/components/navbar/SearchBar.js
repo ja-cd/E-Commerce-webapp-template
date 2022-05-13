@@ -1,25 +1,34 @@
 import classes from "./Navbar.module.css";
-
 import { useHistory } from "react-router-dom";
+import { fetchMatches } from "../store/SearchActions";
+import { useDispatch } from "react-redux";
 
 function SearchBar() {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   function formSubmitHandler(event) {
     event.preventDefault();
-    console.log(event.target[0].value);
+    let term = "/search/" + event.target[0].value;
     history.push({
-      pathname: "/search/",
-      search: event.target[0].value,
+      pathname: term,
     });
   }
-  //TODO create api call that pulls suggestions using search term for showing to user
+
+  function matches(event) {
+    console.log(event.target.value);
+    dispatch(fetchMatches(event.target.value));
+  }
+
   return (
     <>
-      <form className={classes.format} onSubmit={formSubmitHandler}>
+      <form
+        className={classes.format}
+        onSubmit={formSubmitHandler}
+        onChange={matches}
+      >
         <input type="text" name="value" className={classes.form} />
       </form>
-      <div>helaasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdaslo</div>
     </>
   );
 }
