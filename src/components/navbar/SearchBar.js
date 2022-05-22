@@ -16,7 +16,6 @@ function SearchBar() {
   }
 
   function matches(event) {
-    console.log(event.target.value);
     dispatch(fetchMatches(event.target.value));
   }
 

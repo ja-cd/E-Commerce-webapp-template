@@ -1,8 +1,9 @@
+import { searchActions } from "./SearchSlice";
+
 export const fetchMatches = (term) => {
+  const request = { searchTerm: term };
   return async (dispatch) => {
     const fetchData = async (term) => {
-      const request = { searchTerm: term };
-      console.log(request);
       const response = await fetch("http://localhost:5000/searchBar/", {
         method: "POST",
         body: JSON.stringify(request),
@@ -21,7 +22,7 @@ export const fetchMatches = (term) => {
 
     try {
       const response = await fetchData();
-      console.log(response);
+      dispatch(searchActions.storeResults(response));
     } catch (error) {
       console.log(error);
     }

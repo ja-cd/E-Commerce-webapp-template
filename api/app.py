@@ -49,15 +49,16 @@ def getProduct():
 # Searchbar endpoint receives a string and returns a list of product names that match
 @app.route('/searchBar/', methods=['POST'])
 def searchBar():
-  print(request.get_json())
   searchTerm = request.get_json()
+  if searchTerm["searchTerm"] == '':
+    return jsonify('')
   itemsFound = []
   for product in productList:
       if searchTerm["searchTerm"].lower() in product["productName"].lower():
           itemsFound.append(product["productName"])
   if len(itemsFound) > 0:
       return jsonify(itemsFound)
-  return('Not found')
+  return jsonify('')
 
 
 if __name__ == '__main__':

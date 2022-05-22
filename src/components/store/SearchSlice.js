@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const searchSlice = createSlice({
   name: "search",
   initialState: {
-    searchTerm: "",
+    results: [],
   },
   reducers: {
-    // toggles show cart state
-    toggleCart(state) {
-      state.showCart = !state.showCart;
+    storeResults(state, action) {
+      state.results = action.payload;
+      console.log(state.results);
     },
   },
 });
