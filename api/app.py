@@ -35,7 +35,7 @@ productList = [
 def hello():
   return jsonify('hello')
 
-@app.route('/search', methods=['GET'])
+@app.route('/search/', methods=['POST'])
 def getProduct():
   searchTerm = request.get_json()
   itemsFound = []
@@ -43,6 +43,7 @@ def getProduct():
       if searchTerm["searchTerm"].lower() in product["productName"].lower():
           itemsFound.append(product)
   if len(itemsFound) > 0:
+      print(itemsFound)
       return jsonify(itemsFound)
   return('Not found')
 
@@ -53,10 +54,16 @@ def searchBar():
   if searchTerm["searchTerm"] == '':
     return jsonify('')
   itemsFound = []
+  itemTemp = {}
   for product in productList:
       if searchTerm["searchTerm"].lower() in product["productName"].lower():
-          itemsFound.append(product["productName"])
+          itemTemp = {
+            'productName': product["productName"],
+            'key': product['key'],
+          }
+          itemsFound.append(itemTemp)
   if len(itemsFound) > 0:
+      print(itemsFound)
       return jsonify(itemsFound)
   return jsonify('')
 

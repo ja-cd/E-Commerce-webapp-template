@@ -8,6 +8,7 @@ import SearchBar from "./SearchBar";
 function Navbar() {
   const quantity = useSelector((state) => state.cart.totalQuantity);
   const results = useSelector((state) => state.search.results);
+  const showResults = useSelector((state) => state.search.showResults);
   return (
     <>
       <nav className={classes.navbar}>
@@ -17,14 +18,16 @@ function Navbar() {
 
         <div>
           <SearchBar />
-          <div className={classes.apiresults}>
-            {results.map((item) => (
-              <>
-                <NavLink to={"/search/" + item}>{item}</NavLink>
-                <div />
-              </>
-            ))}
-          </div>
+          {showResults && (
+            <div className={classes.apiresults}>
+              {results.map((item) => (
+                <div key={item['key']}>
+                  <NavLink to={"/search/" + item['productName']}>{item.productName}</NavLink>
+                  <div />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <NavLink className={classes.cart} to="/cart">

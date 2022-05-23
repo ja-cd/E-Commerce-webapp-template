@@ -28,3 +28,32 @@ export const fetchMatches = (term) => {
     }
   };
 };
+
+export const fetchFull = (term) => {
+  const request = { searchTerm: term };
+  return async (dispatch) => {
+    const fetchSingle = async (term) => {
+      const response = await fetch("http://localhost:5000/search/", {
+        method: "POST",
+        body: JSON.stringify(request),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Error could not fetch");
+      }
+      const data = await response.json();
+
+      return data;
+    };
+
+    try {
+      const response = await fetchSingle();
+      dispatch(searchActions.productResult(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
