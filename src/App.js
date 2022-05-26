@@ -3,20 +3,25 @@ import "./App.css";
 
 import Navbar from "./components/navbar/Navbar";
 
-import Featured from "./pages/FeaturedPage";
+import Landing from "./pages/LandingPage";
 import SearchPage from "./pages/SearchPage";
 import CartPage from "./pages/CartPage";
+import CollectionsPage from "./pages/CollectionsPage";
 
 function App() {
   return (
     <>
       <Navbar />
       <Route path="/" exact>
-        <Featured />
+        <Landing />
       </Route>
 
       <Route path="/search/:searchTerm">
         <SearchPage />
+      </Route>
+
+      <Route path="/collections">
+        <CollectionsPage />
       </Route>
 
       <Route path="/cart">

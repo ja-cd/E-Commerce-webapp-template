@@ -30,10 +30,28 @@ productList = [
       "price": 1025,
     },
 ]
+collections = [
+  {
+    "collectionName": "Self Care",
+  },
+  {
+    "collectionName": "Literature",
+  },
+  {
+    "collectionName": "Games",
+  },
+  {
+    "collectionName": "Furniture",
+  },
+]
 
 @app.route('/hello')
 def hello():
   return jsonify('hello')
+
+@app.route('/collections/', methods=['GET'])
+def getCollections():
+  return jsonify(collections)
 
 @app.route('/search/', methods=['POST'])
 def getProduct():

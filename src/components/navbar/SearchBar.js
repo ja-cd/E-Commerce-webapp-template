@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import { fetchMatches } from "../store/SearchActions";
 import { useDispatch } from "react-redux";
 
+import { searchActions } from "../store/SearchSlice";
+
 function SearchBar() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -19,6 +21,10 @@ function SearchBar() {
     dispatch(fetchMatches(event.target.value));
   }
 
+  function toggleResults() {
+    dispatch(searchActions.resultsOn());
+  }
+
   return (
     <>
       <form
@@ -26,7 +32,12 @@ function SearchBar() {
         onSubmit={formSubmitHandler}
         onChange={matches}
       >
-        <input type="text" name="value" className={classes.form} />
+        <input
+          type="text"
+          name="value"
+          className={classes.form}
+          onClick={toggleResults}
+        />
       </form>
     </>
   );

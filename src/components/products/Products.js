@@ -1,5 +1,7 @@
 import "./Products.css";
 
+import { NavLink } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/cartSlice";
 
@@ -13,24 +15,6 @@ function Products() {
       description: "Leather bound, soft paper",
       price: 10,
     },
-    {
-      key: 2,
-      productName: "Phone",
-      description: "Suspiciously low cost phone",
-      price: 399,
-    },
-    {
-      key: 3,
-      productName: "Desk",
-      description: "Just as good as the real oak",
-      price: 99,
-    },
-    {
-      key: 4,
-      productName: "Weird thing",
-      description: "Unknown materials used",
-      price: 1025,
-    },
   ];
 
   return (
@@ -38,7 +22,9 @@ function Products() {
       {dummyProducts.map((item) => (
         <article key={item.key} className="card">
           <header>
-            <h3>{item.productName}</h3>
+            <NavLink to={"/search/" + item["productName"]}>
+              {item.productName}
+            </NavLink>
           </header>
           <p>{item.description}</p>
           <div className="price">${item.price}</div>

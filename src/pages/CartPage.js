@@ -1,4 +1,4 @@
-import Cart from "../components/navbar/Cart" 
+import Cart from "../components/navbar/Cart";
 function CartPage() {
   return <Cart />;
 }

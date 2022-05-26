@@ -16,13 +16,19 @@ function Navbar() {
           E-Commerce Site
         </NavLink>
 
+        <NavLink className={classes.navbar} to="/collections">
+          Collections
+        </NavLink>
+
         <div>
           <SearchBar />
           {showResults && (
             <div className={classes.apiresults}>
               {results.map((item) => (
-                <div key={item['key']}>
-                  <NavLink to={"/search/" + item['productName']}>{item.productName}</NavLink>
+                <div key={item["key"]}>
+                  <NavLink to={"/search/" + item["productName"]}>
+                    {item.productName}
+                  </NavLink>
                   <div />
                 </div>
               ))}

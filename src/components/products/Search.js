@@ -2,28 +2,35 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchFull } from "../store/SearchActions";
+import { searchActions } from "../store/SearchSlice";
 
 function Search() {
   const dispatch = useDispatch();
   const params = useParams();
   const product = useSelector((state) => state.search.productSearchResults);
-  console.log("CURRENTLY IN PRODUCT:" + product);
+  const showInd = useSelector((state) => state.search.showIndividual);
+  const prodChanged = useSelector((state) => state.search.prodChanged);
 
-  console.log("API CALL DISPATCHING:" + product);
-  dispatch(fetchFull(params.searchTerm));
-  console.log("AFTER CALL IN PRODUCT:" + product);
+  useEffect(() => {
+    dispatch(fetchFull(params.searchTerm));
+  }, [params.searchTerm]);
 
   return (
     <>
       <h3>Search page</h3>
-      {product.map((item) => (
-        <div key={item["key"]}>
-          <h1>
-            {item.productName} - ${item.price}
-          </h1>
-          <h3>{item.description}</h3>
+      {!showInd && <h1>LOADING</h1>}
+      {showInd && (
+        <div>
+          {product.map((item) => (
+            <div key={item["key"]}>
+              <h1>
+                {item.productName} - ${item.price}
+              </h1>
+              <h3>{item.description}</h3>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </>
   );
 }
