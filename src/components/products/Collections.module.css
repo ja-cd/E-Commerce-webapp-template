@@ -1,0 +1,20 @@
+.coll{
+    padding: 2%;
+
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    left: 5%;
+}
+
+.header{
+    position: relative;
+    left: 40%;
+    width: 307px;
+}

@@ -8,6 +8,7 @@ const searchSlice = createSlice({
     showResults: false,
     showIndividual: false,
     prodChanged: false,
+    collections: [],
   },
   reducers: {
     // storeResults checks if the api returned results or an empty string. If empty, set condition
@@ -28,9 +29,12 @@ const searchSlice = createSlice({
     resultsOn(state) {
       state.showResults = true;
     },
-    toggleResults(state){
+    toggleResults(state) {
       state.showResults = false;
-    }
+    },
+    collectionResult(state, action) {
+      state.collections = action.payload;
+    },
   },
 });
 

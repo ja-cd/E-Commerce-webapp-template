@@ -32,16 +32,24 @@ productList = [
 ]
 collections = [
   {
+    "key": 1,
     "collectionName": "Self Care",
+    "url": "https://i.imgur.com/WuFJV8d.png",
   },
   {
+    "key": 2,
     "collectionName": "Literature",
+    "url": "https://i.imgur.com/eRSDfrR.png",
   },
   {
+    "key": 3,
     "collectionName": "Games",
+    "url": "https://i.imgur.com/tT7BzCM.png",
   },
   {
+    "key": 4,
     "collectionName": "Furniture",
+    "url": "https://i.imgur.com/eWyjefO.png",
   },
 ]
 
