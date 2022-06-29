@@ -8,6 +8,7 @@ import SearchPage from "./pages/SearchPage";
 import CartPage from "./pages/CartPage";
 import CollectionsPage from "./pages/CollectionsPage";
 import CollDetailsPage from "./pages/CollDetailsPage";
+import { Redirect } from "react-router-dom";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
       <Navbar />
       <Route path="/" exact>
         <Landing />
+      </Route>
+
+      <Route path="/search/" exact>
+        <Redirect to="/" />
       </Route>
 
       <Route path="/search/:searchTerm">

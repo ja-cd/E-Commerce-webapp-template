@@ -15,6 +15,7 @@ function Collections() {
   useEffect(() => {
     dispatch(fetchCollections());
   }, []);
+
   return (
     <>
       <h1 className={classes.header}>ALL COLLECTIONS</h1>

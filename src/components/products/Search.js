@@ -23,10 +23,17 @@ function Search() {
         <div>
           {product.map((item) => (
             <div key={item["key"]}>
-              <h1>
-                {item.productName} - ${item.price}
-              </h1>
-              <h3>{item.description}</h3>
+              <div>
+                <a href="">
+                  <img src={item.images[1]} />
+                </a>
+              </div>
+              <div>
+                <h1>
+                  {item.productName} - ${item.price}
+                </h1>
+                <h3>{item.description}</h3>
+              </div>
             </div>
           ))}
         </div>

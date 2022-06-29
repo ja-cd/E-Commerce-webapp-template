@@ -7,13 +7,18 @@ import { cartActions } from "../store/cartSlice";
 
 function Products() {
   const dispatch = useDispatch();
-
   var dummyProducts = [
     {
       key: 1,
       productName: "Book",
       description: "Leather bound, soft paper",
       price: 10,
+    },
+    {
+      key: 2,
+      productName: "Pokemon",
+      description: "Catch em all",
+      price: 29.99,
     },
   ];
 

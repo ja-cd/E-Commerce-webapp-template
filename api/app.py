@@ -28,6 +28,12 @@ productList = [
       "productName": "Weird thing",
       "description": "Unknown materials used",
       "price": 1025,
+      "images": {
+        1: "https://i.imgur.com/WuFJV8d.png",
+        2: "https://i.imgur.com/WuFJV8d.png",
+        3: "https://i.imgur.com/WuFJV8d.png",
+        4: "https://i.imgur.com/WuFJV8d.png",
+      }
     },
 ]
 collections = [
