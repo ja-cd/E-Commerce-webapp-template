@@ -1,3 +1,5 @@
-# E-Commerce-webapp-template
+# E-Commerce
 
-E-Commerce webapp template for practice on frontend/backend technologies. 
+Website template for an e-commerce store front. Front end uses api calls to retrieve catologue information dynamically.
+
+Frontend made with Reactjs and backend in Python.
