@@ -63,16 +63,25 @@ collection_list = [
 
 @app.route('/hello')
 def hello():
+    """
+    A very nice endpoint :)
+    """
     return jsonify('hello')
 
 
 @app.route('/collections/', methods=['GET'])
 def get_collections():
+    """
+    Returns full list of collections, including cover image of the collection.
+    """
     return jsonify(collection_list)
 
 
 @app.route('/search/', methods=['POST'])
 def get_product():
+    """
+    Searches through product-list
+    """
     search_term = request.get_json()
     items_found = []
     for product in productList:
@@ -81,12 +90,14 @@ def get_product():
     if len(items_found) > 0:
         print(items_found)
         return jsonify(items_found)
-    return ('Not found')
+    return 'Not found'
 
 
-# Searchbar endpoint receives a string and returns a list of product names that match
 @app.route('/searchBar/', methods=['POST'])
 def search_bar():
+    """
+    Searchbar endpoint receives a string and returns a list of product names that match
+    """
     search_term = request.get_json()
     if search_term["searchTerm"] == '':
         return jsonify('')
