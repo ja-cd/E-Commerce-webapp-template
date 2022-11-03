@@ -5,7 +5,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-productList = [
+product_list = [
     {
         "key": 1,
         "productName": "Book",
@@ -84,7 +84,7 @@ def get_product():
     """
     search_term = request.get_json()
     items_found = []
-    for product in productList:
+    for product in product_list:
         if search_term["searchTerm"].lower() in product["productName"].lower():
             items_found.append(product)
     if len(items_found) > 0:
@@ -103,7 +103,7 @@ def search_bar():
         return jsonify('')
     items_found = []
     item_temp = {}
-    for product in productList:
+    for product in product_list:
         if search_term["searchTerm"].lower() in product["productName"].lower():
             item_temp = {
                 'productName': product["productName"],
