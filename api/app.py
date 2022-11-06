@@ -10,30 +10,40 @@ productList = [
       "productName": "Book",
       "description": "Leather bound, soft paper",
       "price": 10,
+      "images": ["https://i.imgur.com/aKXzodL.png"],
+      "collectionName": "Literature"
     },
     {
       "key": 2,
       "productName": "Phone",
       "description": "Suspiciously low cost phone",
       "price": 399,
+      "images": ["https://i.imgur.com/acKLHYL.png"],
+      "collectionName": "Electronics"
     },
     {
       "key": 3,
       "productName": "Desk",
       "description": "Just as good as the real oak",
       "price": 99,
+      "images": ["https://i.imgur.com/jtj2vWd.png"],
+      "collectionName": "Furniture"
     },
     {
       "key": 4,
       "productName": "Weird thing",
       "description": "Unknown materials used",
       "price": 1025,
-      "images": {
-        1: "https://i.imgur.com/WuFJV8d.png",
-        2: "https://i.imgur.com/WuFJV8d.png",
-        3: "https://i.imgur.com/WuFJV8d.png",
-        4: "https://i.imgur.com/WuFJV8d.png",
-      }
+      "images": ["https://i.imgur.com/CyE49xW.png"],
+      "collectionName": "Self Care"
+    },
+    {
+      "key": 5,
+      "productName": "Best Video Game Ever",
+      "description": "It's mad fun",
+      "price": 59.99,
+      "images": ["https://i.imgur.com/CyE49xW.png"],
+      "collectionName": "Games",
     },
 ]
 collections = [
@@ -57,6 +67,12 @@ collections = [
     "collectionName": "Furniture",
     "url": "https://i.imgur.com/eWyjefO.png",
   },
+  {
+    "key": 5,
+    "collectionName": "Electronics",
+    "url": "https://i.imgur.com/eWyjefO.png",
+  },
+
 ]
 
 @app.route('/hello')
@@ -66,6 +82,20 @@ def hello():
 @app.route('/collections/', methods=['GET'])
 def getCollections():
   return jsonify(collections)
+
+@app.route('/collectionProducts/', methods=['POST'])
+def getCollectionProducts():
+  searchTerm = request.get_json()
+  itemsFound = []
+  for product in productList:
+      if searchTerm["searchTerm"].lower() in product["collectionName"].lower():
+          itemsFound.append(product)
+  if len(itemsFound) > 0:
+      print(itemsFound)
+      return jsonify(itemsFound)
+  return('Not found')
+
+
 
 @app.route('/search/', methods=['POST'])
 def getProduct():

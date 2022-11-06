@@ -22,6 +22,36 @@ export const fetchMatches = (term) => {
     };
 
     try {
+      //stores data fetched
+      const response = await fetchData();
+      dispatch(searchActions.storeResults(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const fetchCollList = (term) => {
+  const request = { searchTerm: term };
+  return async (dispatch) => {
+    const fetchData = async (term) => {
+      const response = await fetch("http://localhost:5000/collectionProducts", {
+        method: "POST",
+        body: JSON.stringify(request),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Error could not fetch");
+      }
+      const data = await response.json();
+
+      return data;
+    };
+
+    try {
       const response = await fetchData();
       dispatch(searchActions.storeResults(response));
     } catch (error) {
