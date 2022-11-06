@@ -1,10 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
+
 
 app = Flask(__name__)
 CORS(app)
 
-productList = [
+product_list = [
     {
       "key": 1,
       "productName": "Book",
@@ -46,47 +47,56 @@ productList = [
       "collectionName": "Games",
     },
 ]
-collections = [
-  {
-    "key": 1,
-    "collectionName": "Self Care",
-    "url": "https://i.imgur.com/WuFJV8d.png",
-  },
-  {
-    "key": 2,
-    "collectionName": "Literature",
-    "url": "https://i.imgur.com/eRSDfrR.png",
-  },
-  {
-    "key": 3,
-    "collectionName": "Games",
-    "url": "https://i.imgur.com/tT7BzCM.png",
-  },
-  {
-    "key": 4,
-    "collectionName": "Furniture",
-    "url": "https://i.imgur.com/eWyjefO.png",
-  },
-  {
+
+collection_list= [
+    {
+        "key": 1,
+        "collectionName": "Self Care",
+        "url": "https://i.imgur.com/WuFJV8d.png",
+    },
+    {
+        "key": 2,
+        "collectionName": "Literature",
+        "url": "https://i.imgur.com/eRSDfrR.png",
+    },
+    {
+        "key": 3,
+        "collectionName": "Games",
+        "url": "https://i.imgur.com/tT7BzCM.png",
+    },
+    {
+        "key": 4,
+        "collectionName": "Furniture",
+        "url": "https://i.imgur.com/eWyjefO.png",
+    },
+    {
     "key": 5,
     "collectionName": "Electronics",
     "url": "https://i.imgur.com/eWyjefO.png",
   },
-
 ]
 
-@app.route('/hello')
+
+@ app.route('/hello')
 def hello():
-  return jsonify('hello')
+    """
+    A very nice endpoint :)
+    """
+    return jsonify('hello')
 
-@app.route('/collections/', methods=['GET'])
-def getCollections():
-  return jsonify(collections)
 
-@app.route('/collectionProducts/', methods=['POST'])
+@ app.route('/collections/', methods=['GET'])
+def get_collections():
+    """
+    Returns full list of collections, including cover image of the collection.
+    """
+    return jsonify(collection_list)
+
+
+@ app.route('/collectionProducts/', methods=['POST'])
 def getCollectionProducts():
-  searchTerm = request.get_json()
-  itemsFound = []
+  searchTerm= request.get_json()
+  itemsFound= []
   for product in productList:
       if searchTerm["searchTerm"].lower() in product["collectionName"].lower():
           itemsFound.append(product)
@@ -97,37 +107,43 @@ def getCollectionProducts():
 
 
 
-@app.route('/search/', methods=['POST'])
-def getProduct():
-  searchTerm = request.get_json()
-  itemsFound = []
-  for product in productList:
-      if searchTerm["searchTerm"].lower() in product["productName"].lower():
-          itemsFound.append(product)
-  if len(itemsFound) > 0:
-      print(itemsFound)
-      return jsonify(itemsFound)
-  return('Not found')
+@ app.route('/search/', methods=['POST'])
+def get_product():
+    """
+    Searches through product-list
+    """
+    search_term= request.get_json()
+    items_found= []
+    for product in product_list:
+        if search_term["searchTerm"].lower() in product["productName"].lower():
+            items_found.append(product)
+    if len(items_found) > 0:
+        print(items_found)
+        return jsonify(items_found)
+    return 'Not found'
 
-# Searchbar endpoint receives a string and returns a list of product names that match
-@app.route('/searchBar/', methods=['POST'])
-def searchBar():
-  searchTerm = request.get_json()
-  if searchTerm["searchTerm"] == '':
+
+@ app.route('/searchBar/', methods=['POST'])
+def search_bar():
+    """
+    Searchbar endpoint receives a string and returns a list of product names that match
+    """
+    search_term= request.get_json()
+    if search_term["searchTerm"] == '':
+        return jsonify('')
+    items_found= []
+    item_temp= {}
+    for product in product_list:
+        if search_term["searchTerm"].lower() in product["productName"].lower():
+            item_temp= {
+                'productName': product["productName"],
+                'key': product['key'],
+            }
+            items_found.append(item_temp)
+    if len(items_found) > 0:
+        print(items_found)
+        return jsonify(items_found)
     return jsonify('')
-  itemsFound = []
-  itemTemp = {}
-  for product in productList:
-      if searchTerm["searchTerm"].lower() in product["productName"].lower():
-          itemTemp = {
-            'productName': product["productName"],
-            'key': product['key'],
-          }
-          itemsFound.append(itemTemp)
-  if len(itemsFound) > 0:
-      print(itemsFound)
-      return jsonify(itemsFound)
-  return jsonify('')
 
 
 if __name__ == '__main__':
