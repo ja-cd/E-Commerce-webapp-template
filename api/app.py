@@ -1,8 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory, render_template
 from flask_cors import CORS
+import os
 
 
-app = Flask(__name__)
+# Configure Flask to serve React build files
+app = Flask(__name__, 
+            static_folder='../build/static',
+            template_folder='../build')
 CORS(app)
 
 product_list = [
@@ -77,7 +81,7 @@ collection_list= [
 ]
 
 
-@ app.route('/hello')
+@ app.route('/api/hello')
 def hello():
     """
     A very nice endpoint :)
@@ -85,7 +89,7 @@ def hello():
     return jsonify('hello')
 
 
-@ app.route('/collections/', methods=['GET'])
+@ app.route('/api/collections/', methods=['GET'])
 def get_collections():
     """
     Returns full list of collections, including cover image of the collection.
@@ -93,11 +97,11 @@ def get_collections():
     return jsonify(collection_list)
 
 
-@ app.route('/collectionProducts/', methods=['POST'])
+@ app.route('/api/collectionProducts/', methods=['POST'])
 def getCollectionProducts():
   searchTerm= request.get_json()
   itemsFound= []
-  for product in productList:
+  for product in product_list:
       if searchTerm["searchTerm"].lower() in product["collectionName"].lower():
           itemsFound.append(product)
   if len(itemsFound) > 0:
@@ -107,7 +111,7 @@ def getCollectionProducts():
 
 
 
-@ app.route('/search/', methods=['POST'])
+@ app.route('/api/search/', methods=['POST'])
 def get_product():
     """
     Searches through product-list
@@ -123,7 +127,7 @@ def get_product():
     return 'Not found'
 
 
-@ app.route('/searchBar/', methods=['POST'])
+@ app.route('/api/searchBar/', methods=['POST'])
 def search_bar():
     """
     Searchbar endpoint receives a string and returns a list of product names that match
@@ -144,6 +148,42 @@ def search_bar():
         print(items_found)
         return jsonify(items_found)
     return jsonify('')
+
+
+# Route to serve React app's static files (CSS, JS, images)
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(app.static_folder, filename)
+
+# Routes for React app assets
+@app.route('/favicon.ico')
+def serve_favicon():
+    return send_from_directory('../build', 'favicon.ico')
+
+@app.route('/manifest.json')
+def serve_manifest():
+    return send_from_directory('../build', 'manifest.json')
+
+@app.route('/robots.txt')
+def serve_robots():
+    return send_from_directory('../build', 'robots.txt')
+
+@app.route('/logo192.png')
+def serve_logo192():
+    return send_from_directory('../build', 'logo192.png')
+
+@app.route('/logo512.png')
+def serve_logo512():
+    return send_from_directory('../build', 'logo512.png')
+
+# Catch-all route to serve React app for client-side routing
+@app.route('/')
+@app.route('/<path:path>')
+def serve_react_app(path=''):
+    # Don't intercept API routes
+    if path and path.startswith('api/'):
+        return jsonify({'error': 'API endpoint not found'}), 404
+    return render_template('index.html')
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ export const fetchMatches = (term) => {
   const request = { searchTerm: term };
   return async (dispatch) => {
     const fetchData = async (term) => {
-      const response = await fetch("http://localhost:5000/searchBar/", {
+      const response = await fetch("/api/searchBar/", {
         method: "POST",
         body: JSON.stringify(request),
         headers: {
@@ -35,7 +35,7 @@ export const fetchCollList = (term) => {
   const request = { searchTerm: term };
   return async (dispatch) => {
     const fetchData = async (term) => {
-      const response = await fetch("http://localhost:5000/collectionProducts", {
+      const response = await fetch("/api/collectionProducts/", {
         method: "POST",
         body: JSON.stringify(request),
         headers: {
@@ -65,7 +65,7 @@ export const fetchFull = (term) => {
   const request = { searchTerm: term };
   return async (dispatch) => {
     const fetchSingle = async (term) => {
-      const response = await fetch("http://localhost:5000/search/", {
+      const response = await fetch("/api/search/", {
         method: "POST",
         body: JSON.stringify(request),
         headers: {
@@ -94,7 +94,7 @@ export const fetchFull = (term) => {
 export const fetchCollections = () => {
   return async (dispatch) => {
     const fetchColl = async () => {
-      const response = await fetch("http://localhost:5000/collections/", {});
+      const response = await fetch("/api/collections/", {});
 
       if (!response.ok) {
         throw new Error("Error could not fetch");
